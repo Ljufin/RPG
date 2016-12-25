@@ -8,10 +8,10 @@ class Character:
 	role = "Nullspace Sorcerer"
 	level = 0
 	strength = 0
-	hp = 0
+	Vitality = 0
 	defense = 0
 	dexterity = 0
-	mp = 0
+	Intelligence = 0
 	charisma = 0
 	wisdom = 0
 	willpower = 0
@@ -38,10 +38,10 @@ class Player(Character):
 			self.role = load[1]
 			self.level = load[2]
 			self.strength = load[3]
-			self.hp = load[4]
+			self.vitality = load[4]
 			self.defense = load[5]
 			self.dexterity = load[6]
-			self.mp = load[7]
+			self.intelligence = load[7]
 			self.charisma = load[8]
 			self.wisdom = load[9]
 			self.willpower = load[10]
