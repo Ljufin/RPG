@@ -18,9 +18,13 @@ player_info.set_border_element("#")
 inn_screen = terminal.BasicMenu()
 inn_screen.build_menu(("Sleep?", "[Y]: Stay the night (10 gold)", "[N]: No"))
 inn_screen.set_border_element("~")
+too_poor_screen = terminal.SplashScreen("You are too poor, go away")
+too_poor_screen.set_border_element("$")
+resting_screen = terminal.SplashScreen("You feel completely rested, your hp and mp is restored to full")
+resting_screen.set_border_element("Z")
 
 # create a player object
-player_data = ("Will", "Dev", 100, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000)
+player_data = ("Will", "Dev", 100, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 10, 1000, 1000)
 user = objects.Player(load=player_data)
 
 # main game loop
@@ -38,6 +42,11 @@ while 1:
 	elif choice is 's':
 		inn_choice = inn_screen.display()
 		if inn_choice is "y":
-			user.gold -= 10
+			if user.gold < 10:
+				too_poor_screen.display()
+			else:
+				resting_screen.display()
+				user.gold -= 10
+
 
 os.system("cls")
