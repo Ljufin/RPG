@@ -140,5 +140,5 @@ class PlayerInfo(Screen):
 		self.content += " Wisdom: "+str(player.wisdom)+"\n"
 		self.content += " Willpower: "+str(player.willpower)+"\n"
 		self.content += " Perception: "+str(player.perception)+"\n"
-		self.content += " Luck: "+str(player.luck)
+		self.content += " Luck: "+str(player.luck)+"\n"
 		self.content += " Gold: "+str(player.gold)
