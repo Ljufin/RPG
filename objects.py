@@ -5,47 +5,50 @@ class Character:
 
 	# attributes for the character
 	name = "NULL"
+	role = "Nullspace Sorcerer"
 	level = 0
 	strength = 0
-	vitality = 0
+	hp = 0
 	defense = 0
 	dexterity = 0
-	intelligence = 0
+	mp = 0
 	charisma = 0
 	wisdom = 0
 	willpower = 0
 	perception = 0
 	luck = 0
-
-	def display_stats(self):
-		"""Display all stats"""
-
-		print("Name:", self.name)
-		print("Level:", self.level)
-		print("Strength:", self.strength)
-		print("Vitality:", self.vitality)
-		print("Defense:", self.defense)
-		print("Dexterity:", self.dexterity)
-		print("Intelligence:", self.intelligence)
-		print("Charisma:", self.charisma)
-		print("Wisdom:", self.wisdom)
-		print("Willpower:", self.willpower)
-		print("Perception:", self.perception)
-		print("Luck:", self.luck)
+	gold = 0
 
 class Player(Character):
 	"""Class for the player character"""
 
-	def __init__(self, player_name=None, load= None):
+	def __init__(self, player_name=None, load=None):
 		"""Constructor of the player class, should only be called once, before the main game loop"""
 
 		# will set the player name if no load mode is selected
 		if load is None:
 			# set player name
 			if player_name is None:
-				self.name = str(input("Please choose a name for your character:"))
+				self.name = str(input("Please choose a name for your character: "))
 		# if load == "file":
 			# TODO: implement save files
+		# Loads the player data from a tuple, mostly for debug purposes right now
+		elif isinstance(load, tuple):
+			self.name = load[0]
+			self.role = load[1]
+			self.level = load[2]
+			self.strength = load[3]
+			self.hp = load[4]
+			self.defense = load[5]
+			self.dexterity = load[6]
+			self.mp = load[7]
+			self.charisma = load[8]
+			self.wisdom = load[9]
+			self.willpower = load[10]
+			self.perception = load[11]
+			self.luck = load[12]
+			self.gold = load[13]
+
 
 	def load_player(self):
 		"""Loads all the player data either from a local file or possibly from remote"""
@@ -53,5 +56,8 @@ class Player(Character):
 		# TODO: implement load_player function
 
 
+	def rest(self):
+		"""Called whenever the player rests at an inn or equivalent. Restores hp and mp to full"""
+		# TODO: implement the stats and leveling system before doing this method
 
 

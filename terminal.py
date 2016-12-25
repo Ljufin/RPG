@@ -1,6 +1,7 @@
 """This module acts as the display drivers for the terminal graphics"""
 
 import shutil
+import objects
 
 class Screen:
 	"""This object is an easy way of displaying each screen"""
@@ -88,7 +89,7 @@ class TownScreen(Screen):
 
 	town_title = "\n\tWillsburg"
 
-	town_picture = """
+	town_image = """
                                ___        ___       T__
                     ________   | |~~~~~~~~| ||~~~~| |||
 __|~~~~~~~~|   _/\_ |^^^^^^|  _| |--------| ||    | |##
@@ -100,14 +101,44 @@ __|~~~~~~~~|   _/\_ |^^^^^^|  _| |--------| ||    | |##
 	def update(self, level=1):
 		"""Displays specific options based on the player's level and then displays the screen"""
 
-		self.content = self.town_title+self.town_picture+self.vsep
+		self.content = self.town_title+self.town_image + self.vsep
 		if level >= 1:
 			self.content += "[F] Fight\n"
 			self.content += "[S] Sleep\n"
 			self.content += "[P] Check character\n"
 
-
 		# always add the quit option
 		self.content += "[Q} Quit the game"
 
 		return self.display()
+
+	def set_title(self, new_title):
+		"""Sets the town title"""
+		self.town_title = new_title
+
+	def set_picture(self, new_picture):
+		"""Sets the town picture"""
+		self.town_image = new_picture
+
+class PlayerInfo(Screen):
+	"""This is the screen for displaying character info"""
+
+	input_type = "press_any"
+
+	def update(self, player):
+		"""Updates content based on what is stored in the player object"""
+		self.content = ""
+		self.content += " Name: "+player.name+"\n"
+		self.content += " Role: " + player.role + "\n"
+		self.content += " Level: "+str(player.level)+"\n"
+		self.content += " Strength: "+str(player.strength)+"\n"
+		self.content += " HP: "+str(player.hp)+"\n"
+		self.content += " Defense: "+str(player.defense)+"\n"
+		self.content += " Dexterity: "+str(player.dexterity)+"\n"
+		self.content += " MP: "+str(player.mp)+"\n"
+		self.content += " Charisma: "+str(player.charisma)+"\n"
+		self.content += " Wisdom: "+str(player.wisdom)+"\n"
+		self.content += " Willpower: "+str(player.willpower)+"\n"
+		self.content += " Perception: "+str(player.perception)+"\n"
+		self.content += " Luck: "+str(player.luck)
+		self.content += " Gold: "+str(player.gold)
