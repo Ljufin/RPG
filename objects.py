@@ -70,4 +70,8 @@ class Player(Character):
 		self.hp = self.vitality
 		self.mp = self.intelligence
 
+class Monster(Character):
+    """This is class used to define all monsters in the game: monsters are all objects of this class"""
 
+    # define a few unique attributes for these monsters
+    exp = 0
