@@ -25,8 +25,40 @@ resting_screen = terminal.SplashScreen("You feel completely rested, your hp and 
 resting_screen.set_border_element("Z")
 
 # create a player object
-player_data = ("Will", "Dev", 100, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 10, 1000, 1000)
+player_data = ("Will", "Dev", 100, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 10, 1000, 1000, 1000)
 user = objects.Player(load=player_data)
+
+
+def battle(player=objects.Player):
+	"""Function holds all the logic for the battle system. Treat this as a separate game"""
+
+
+
+	# TODO: generate a random monster based on the player's level
+	# for now we use a placeholder monster
+	monster_data = ("Punching bag", "Sandbag", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 2000, 0, 20)
+	monster = objects.Monster(monster_data)
+
+
+	# show a splash screen that introduces the battle
+	intro_splash = terminal.SplashScreen("A %s has appeared!" % monster.name)
+	intro_splash.display()
+
+	# battle loop
+	while 1:
+
+		# check hp
+		if (player.hp <= 0) and (monster.hp <= 0):
+			break
+
+		# display battle menu
+		battle = terminal.BattleMenu(player, monster)
+		battle.update()
+		c = ''
+		while c not in ('a', 'd', 'i', 'r'):
+			c = battle.display()
+
+		# TODO: implement choice system
 
 
 def game():
@@ -54,6 +86,7 @@ def game():
 				else:
 					resting_screen.display()
 					user.gold -= 10
+		# TODO: implement the battle system once implemented
 
 	os.system("cls")
 	return

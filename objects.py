@@ -5,7 +5,6 @@ class Character:
 
 	# attributes for the character
 	name = "NULL"
-	role = "Nullspace Sorcerer"
 	level = 0
 	strength = 0
 	# max hit-points
@@ -24,9 +23,13 @@ class Character:
 	# current stats
 	hp = 0
 	mp = 0
+	xp = 0
 
 class Player(Character):
 	"""Class for the player character"""
+
+	# attributes for a player
+	role = "Nullspace Sorcerer"
 
 	def __init__(self, player_name=None, load=None):
 		"""Constructor of the player class, should only be called once, before the main game loop"""
@@ -56,6 +59,7 @@ class Player(Character):
 			self.gold = load[13]
 			self.hp = load[14]
 			self.mp = load[15]
+			self.xp = load[16]
 
 
 	def load_player(self):
@@ -71,7 +75,33 @@ class Player(Character):
 		self.mp = self.intelligence
 
 class Monster(Character):
-    """This is class used to define all monsters in the game: monsters are all objects of this class"""
+	"""This is class used to define all monsters in the game: monsters are all objects of this class"""
 
-    # define a few unique attributes for these monsters
-    exp = 0
+	# TODO: define a few unique attributes for these monsters
+	# TODO: implement an item system first
+	loot = ()
+
+	# This replaces the role attribute for the player
+	type = "normal"
+
+	def __init__(self, attributes=None):
+		"""Similar to player constructor but only loads from the tuple"""
+
+		if isinstance(attributes, tuple):
+			self.name = attributes[0]
+			self.type = attributes[1]
+			self.level = attributes[2]
+			self.strength = attributes[3]
+			self.vitality = attributes[4]
+			self.defense = attributes[5]
+			self.dexterity = attributes[6]
+			self.intelligence = attributes[7]
+			self.charisma = attributes[8]
+			self.wisdom = attributes[9]
+			self.willpower = attributes[10]
+			self.perception = attributes[11]
+			self.luck = attributes[12]
+			self.gold = attributes[13]
+			self.hp = attributes[14]
+			self.mp = attributes[15]
+			self.xp = attributes[16]

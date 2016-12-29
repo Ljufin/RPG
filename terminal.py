@@ -97,7 +97,6 @@ __|~~~~~~~~|   _/\_ |^^^^^^|  _| |--------| ||    | |##
 
 	vsep = "\n\n\n\n"
 
-
 	def update(self, level=1):
 		"""Displays specific options based on the player's level and then displays the screen"""
 
@@ -143,4 +142,35 @@ class PlayerInfo(Screen):
 		self.content += " Luck: "+str(player.luck)+"\n"
 		self.content += " Gold: "+str(player.gold)+"\n"
 		self.content += " Hp: "+str(player.hp)+"\n"
-		self.content += " Mp: "+str(player.mp)
+		self.content += " Mp: "+str(player.mp)+"\n"
+		self.content += " Xp: "+str(player.xp)
+
+class BattleMenu(Screen):
+	"""Shows the current options AND the player's current hp/mp"""
+
+	input_type = "menu"
+	border_element = "!"
+	player = objects.Player
+	monster = objects.Monster
+
+	def __init__(self, player=None, monster=None):
+		"""Loads the needed character objects"""
+
+		if player is not None and monster is not None:
+			self.player = player
+			self.monster = monster
+
+	def update(self):
+		"""Updates the content from the stats in player and monster"""
+
+		self.content = ""
+		self.content += self.monster.name
+		self.content += "\n\n"
+		self.content += "HP: %i\n" % self.player.hp
+		self.content += "MP: %i\n" % self.player.mp
+
+		self.content += "Actions:\n"
+		self.content += "[A]: Attack\n"
+		self.content += "[D]: Defend\n"
+		self.content += "[I]: Item\n"
+		self.content += "[R]: Run\n"
