@@ -9,8 +9,9 @@ import os
 import terminal
 import objects
 
-os.system("cls")
 
+"""Define the content and screens for the game
+This stuff will eventually be moved to a different file to make creating content more easily"""
 # create screens and specify info
 main_town = terminal.TownScreen()
 player_info = terminal.PlayerInfo()
@@ -27,26 +28,35 @@ resting_screen.set_border_element("Z")
 player_data = ("Will", "Dev", 100, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 10, 1000, 1000)
 user = objects.Player(load=player_data)
 
-# main game loop
-while 1:
+
+def game():
+	"""Function to hold all the game logic. Call to start the game"""
+
 	os.system("cls")
 
-	# display the main menu
-	choice = main_town.update()
-	if choice is 'q':
-		break
-	elif choice is 'p':
-		player_info.update(user)
-		# display the screen
-		player_info.display()
-	elif choice is 's':
-		inn_choice = inn_screen.display()
-		if inn_choice is "y":
-			if user.gold < 10:
-				too_poor_screen.display()
-			else:
-				resting_screen.display()
-				user.gold -= 10
+	# main game loop
+	while 1:
+		os.system("cls")
 
+		# display the main menu
+		choice = main_town.update()
+		if choice is 'q':
+			break
+		elif choice is 'p':
+			player_info.update(user)
+			# display the screen
+			player_info.display()
+		elif choice is 's':
+			inn_choice = inn_screen.display()
+			if inn_choice is "y":
+				if user.gold < 10:
+					too_poor_screen.display()
+				else:
+					resting_screen.display()
+					user.gold -= 10
 
-os.system("cls")
+	os.system("cls")
+	return
+
+if __name__ == "__main__":
+	game()
